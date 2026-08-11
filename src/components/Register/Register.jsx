@@ -5,6 +5,7 @@ import { useState } from "react";
 
 const Register = () => {
   //state declare:
+  const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
 
   const handleRegister = (event) => {
@@ -13,12 +14,15 @@ const Register = () => {
     const password = event.target.password.value;
     console.log("Submission completed", email, password);
 
-    //empty error state:
+    //reset state:
     setError("");
+    setSuccess(false);
 
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
         console.log("After creation of a new user: ", result.user);
+        setSuccess(true);
+        event.target.reset();
       })
       .catch((error) => {
         console.log("Error message is :", error.message);
@@ -55,7 +59,10 @@ const Register = () => {
                 </div>
                 <button className="btn btn-neutral mt-4">Login</button>
               </fieldset>
-              {<p className="text-red-500">{error}</p>}
+              {success && (
+                <p className="text-green-500">Account created Successfully</p>
+              )}
+              {error && <p className="text-red-500">{error}</p>}
             </form>
           </div>
         </div>
