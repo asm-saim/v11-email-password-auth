@@ -7,6 +7,7 @@ const Register = () => {
   //state declare:
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleRegister = (event) => {
     event.preventDefault();
@@ -54,6 +55,11 @@ const Register = () => {
       });
   };
 
+  //show pass:
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <div className="hero bg-base-200 min-h-screen">
       <div className="hero-content flex-col lg:flex-row-reverse">
@@ -72,12 +78,21 @@ const Register = () => {
                   name="email"
                 />
                 <label className="label">Password</label>
-                <input
-                  type="password"
-                  className="input"
-                  placeholder="Password"
-                  name="password"
-                />
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    className="input"
+                    placeholder="Password"
+                    name="password"
+                  />
+                  <button
+                    onClick={handleShowPassword}
+                    className="btn btn-xs absolute right-6 top-2"
+                  >
+                    Eye
+                  </button>
+                </div>
+
                 <div>
                   <a className="link link-hover">Forgot password?</a>
                 </div>
