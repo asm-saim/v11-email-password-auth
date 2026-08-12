@@ -2,6 +2,8 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import React from "react";
 import { auth } from "../../Firebase/firebase.init";
 import { useState } from "react";
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 
 const Register = () => {
   //state declare:
@@ -90,7 +92,7 @@ const Register = () => {
                     onClick={handleShowPassword}
                     className="btn btn-xs absolute right-6 top-2"
                   >
-                    Eye
+                    {showPassword ? <FaEyeSlash /> : <FaEye></FaEye>}
                   </button>
                 </div>
 
