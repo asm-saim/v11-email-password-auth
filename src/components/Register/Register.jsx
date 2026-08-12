@@ -56,7 +56,8 @@ const Register = () => {
   };
 
   //show pass:
-  const handleShowPassword = () => {
+  const handleShowPassword = (event) => {
+    event.preventDefault();
     setShowPassword(!showPassword);
   };
 
