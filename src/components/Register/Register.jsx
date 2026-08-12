@@ -4,6 +4,7 @@ import { auth } from "../../Firebase/firebase.init";
 import { useState } from "react";
 import { FaEye } from "react-icons/fa";
 import { FaEyeSlash } from "react-icons/fa";
+import { Link } from "react-router";
 
 const Register = () => {
   //state declare:
@@ -117,6 +118,7 @@ const Register = () => {
               )}
               {error && <p className="text-red-500">{error}</p>}
             </form>
+            <p>Already have an account? Please <Link className="text-blue-500 underline" to="/login">Login</Link></p>
           </div>
         </div>
       </div>
