@@ -1,10 +1,15 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useState } from "react";
+import {
+  sendEmailVerification,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router";
 import { auth } from "../../Firebase/firebase.init";
 
 const Login = () => {
   const [error, setError] = useState("");
+  const emailRef = useRef();
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -18,11 +23,24 @@ const Login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
         console.log(result.user);
+        if (!result.user.emailVerified) {
+          alert("Please verify your mail");
+        }
       })
       .catch((error) => {
         console.log(error.message);
-        setError(error.message)
+        setError(error.message);
       });
+  };
+
+  const handleForgetPassword = () => {
+    const email = emailRef.current.value;
+    console.log("Forget password", email);
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert("Please check the email to rest password");
+      })
+      .catch();
   };
 
   return (
@@ -38,6 +56,7 @@ const Login = () => {
                   type="email"
                   className="input"
                   name="email"
+                  ref={emailRef}
                   placeholder="Email"
                 />
                 <label className="label">Password</label>
@@ -47,7 +66,7 @@ const Login = () => {
                   placeholder="Password"
                   name="password"
                 />
-                <div>
+                <div onClick={handleForgetPassword}>
                   <a className="link link-hover">Forgot password?</a>
                 </div>
                 <button className="btn btn-neutral mt-4">Login</button>
