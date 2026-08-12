@@ -18,6 +18,30 @@ const Register = () => {
     setError("");
     setSuccess(false);
 
+    //regEx: regular expression
+    // const passwordRegex = /^.{6,}$/;
+    // if (!passwordRegex.test(password)) {
+    //   console.log("Password didn't match");
+    //   setError("Password must be 6 or more character");
+    //   return;
+    // }
+
+    // //for upperLowerCaseAndCharacter:
+    // const upperLowerCaseAndCharacter = /^(?=.*[A-Z])(?=.*[a-z]).+$/;
+    // if (!upperLowerCaseAndCharacter.test(password)) {
+    //   console.log("Password must have one upper and one lowercase");
+    //   setError("Password must have one upper and one lowercase");
+    //   return;
+    // }
+
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).{6,}$/;
+    if (!passwordRegex.test(password)) {
+      setError(
+        "Password must be at least 6 characters and contain at least one uppercase letter, one lowercase letter, and one special character.",
+      );
+      return;
+    }
+
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
         console.log("After creation of a new user: ", result.user);
