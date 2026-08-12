@@ -95,11 +95,16 @@ const Register = () => {
                     {showPassword ? <FaEyeSlash /> : <FaEye></FaEye>}
                   </button>
                 </div>
-
                 <div>
                   <a className="link link-hover">Forgot password?</a>
                 </div>
-                <button className="btn btn-neutral mt-4">Login</button>
+                <div>
+                  <label class="label">
+                    <input type="checkbox" class="checkbox" />
+                    Accept out terms and conditions.
+                  </label>
+                </div>
+                <button className="btn btn-neutral mt-4">Register</button>
               </fieldset>
               {success && (
                 <p className="text-green-500">Account created Successfully</p>
