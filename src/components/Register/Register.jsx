@@ -15,11 +15,17 @@ const Register = () => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
-    console.log("Submission completed", email, password);
+    const terms = event.target.terms.checked;
+    console.log("Submission completed", email, password, terms);
 
     //reset state:
     setError("");
     setSuccess(false);
+
+    if (!terms) {
+      setError("Please accept out terms and conditions.");
+      return;
+    }
 
     //regEx: regular expression
     // const passwordRegex = /^.{6,}$/;
@@ -100,7 +106,7 @@ const Register = () => {
                 </div>
                 <div>
                   <label class="label">
-                    <input type="checkbox" class="checkbox" />
+                    <input type="checkbox" class="checkbox" name="terms" />
                     Accept out terms and conditions.
                   </label>
                 </div>
