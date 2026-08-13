@@ -139,9 +139,7 @@ const Register = () => {
                     {showPassword ? <FaEyeSlash /> : <FaEye></FaEye>}
                   </button>
                 </div>
-                <div>
-                  <a className="link link-hover">Forgot password?</a>
-                </div>
+
                 <div>
                   <label class="label">
                     <input type="checkbox" class="checkbox" name="terms" />
