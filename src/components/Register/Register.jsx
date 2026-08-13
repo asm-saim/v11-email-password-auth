@@ -1,6 +1,7 @@
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
+  updateProfile,
 } from "firebase/auth";
 import React from "react";
 import { auth } from "../../Firebase/firebase.init";
@@ -20,7 +21,9 @@ const Register = () => {
     const email = event.target.email.value;
     const password = event.target.password.value;
     const terms = event.target.terms.checked;
-    console.log("Submission completed", email, password, terms);
+    const name = event.target.name.value;
+    const photo = event.target.photo.value;
+    console.log("Submission completed", email, password, terms, name, photo);
 
     //reset state:
     setError("");
@@ -61,6 +64,15 @@ const Register = () => {
         setSuccess(true);
         event.target.reset();
 
+        //update profile:
+        const profile = {
+          displayName: name,
+          photoURL: photo,
+        };
+        updateProfile(result.user, profile)
+          .then(() => {})
+          .catch();
+
         //email verification:
         sendEmailVerification(result.user).then(() => {
           alert("Please check your email and verify email address");
@@ -88,6 +100,23 @@ const Register = () => {
           <div className="card-body">
             <form onSubmit={handleRegister}>
               <fieldset className="fieldset">
+                {/* name */}
+                <label className="label">Name</label>
+                <input
+                  type="text"
+                  className="input"
+                  placeholder="Enter Name"
+                  name="name"
+                />
+                {/* photo url */}
+                <label className="label">Your Photo</label>
+                <input
+                  type="text"
+                  className="input"
+                  placeholder="Photo Url"
+                  name="photo"
+                />
+                {/* email */}
                 <label className="label">Email</label>
                 <input
                   type="email"
